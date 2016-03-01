@@ -47,10 +47,10 @@
 ;; ELPY mode
 (elpy-enable)
 
-;; REPLACE FLYMAKE BY FLYCHECK
+;; ;; REPLACE FLYMAKE BY FLYCHECK
 (when (require 'flycheck nil t)
-  (setq elpy-modules (delete 'flymake-mode 'elpy-modules))
-  (add-to-list 'elpy-modules 'flycheck-mode))
+  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+  (add-hook 'elpy-mode-hook 'flycheck-mode))
 
 ;; FLYCHECK
 (add-hook 'after-init-hook #'global-flycheck-mode)

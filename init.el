@@ -23,16 +23,12 @@
  '(ido-ignore-files (quote ("\\`CVS/" "\\`#" "\\`.#" "\\`\\.\\./" "\\`\\./" "\\`.+\\.mod" "\\`.+\\.out")))
  '(inhibit-startup-screen t)
  '(safe-local-variable-values (quote ((flycheck-gcc-language-standard . "gnu99"))))
+ '(scroll-bar-mode nil)
  '(standard-indent 2)
  '(tab-width 4)
  '(tool-bar-mode nil)
- '(scroll-bar-mode nil)
  '(x-select-enabled-clipboard t))
 ;; (custom-set-faces
-;;  ;; custom-set-faces was added by Custom.
-;;  ;; If you edit it by hand, you could mess it up, so be careful.
-;;  ;; Your init file should contain only one such instance.
-;;  ;; If there is more than one, they won't work right.
 ;;  '(cursor ((t (:background "dark cyan")))))
 (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
@@ -40,6 +36,11 @@
 ;; (when (executable-find "ipython")
 ;;   (setq python-shell-interpreter "ipython"))
 ;; (put 'dired-find-alternate-file 'disabled nil)
-
-;; Maximize window
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(font-lock-comment-face ((t (:foreground "dark gray" :slant italic))))
+ '(font-lock-doc-face ((t (:inherit font-lock-string-face :slant italic)))))
