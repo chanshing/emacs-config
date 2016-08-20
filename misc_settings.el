@@ -1,3 +1,8 @@
+;;; misc_settings.el --- 
+;;; Commentary:
+;;;     
+;;; Code:
+
 ;; OCTAVE MODE
 (autoload 'octave-mode "octave-mod" nil t)
 (setq auto-mode-alist
@@ -19,10 +24,11 @@
 (setq recentf-max-menu-items 25)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
 
-;; SPLIT AND SWITCH
-(defadvice split-window (after move-point-to-new-window activate)
-  "Moves the point to the newly created window after splitting."
-  (other-window 1))
+;; DO NOT USE: http://stackoverflow.com/questions/6464738/how-can-i-switch-focus-after-buffer-split-in-emacs
+;; ;; SPLIT AND SWITCH
+;; (defadvice split-window (after move-point-to-new-window activate)
+;;   "Moves the point to the newly created window after splitting."
+;;   (other-window 1))
 
 ;; Fortran 90 HOOKS
 (add-hook 'f90-mode-hook (lambda ()
@@ -64,3 +70,9 @@
 
 ;; SHOW MATCHING BRACKET
 (show-paren-mode 1)
+
+;; SPELLCHECK WHEN AUCTEX
+(add-hook 'LaTeX-mode-hook 'turn-on-flyspell)
+
+(provide 'misc_settings)
+;;; misc_settings.el ends here

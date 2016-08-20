@@ -1,3 +1,8 @@
+;;; init_evil.el --- all related to EVILness
+;;; Commentary:
+;;;     
+;;; Code:
+
 (global-evil-leader-mode)
 (evil-mode 1) 
 (setq evil-motion-state-modes
@@ -42,6 +47,8 @@
 ;; documentation of it.
 (set-quit-char (kbd "M-s"))
 
+(setq evil-want-fine-undo t)
+
 ;; ESC as "kj"
 ;; (key-chord-mode 1)
 ;; (setq key-chord-two-keys-delay 0.5)
@@ -60,12 +67,12 @@
 (defun set-in-all-evil-states-but-insert (key def)
   (set-in-all-evil-states key def (list evil-normal-state-map
 										evil-visual-state-map
-										evil-emacs-state-map
+										;; evil-emacs-state-map
 										evil-motion-state-map)))
 
 (defun set-in-all-evil-states-but-insert-and-visual (key def)
   (set-in-all-evil-states key def (list evil-normal-state-map
-										evil-emacs-state-map
+										;; evil-emacs-state-map
 										evil-motion-state-map)))
 
 (evil-define-motion myevil-next-visual-line (count)
@@ -86,8 +93,10 @@
   (evil-backward-char (or count 5)))
 
 ;; TURBO-NAVIGATION
-(set-in-all-evil-states-but-insert-and-visual "\M-j" '(lambda() (interactive) (evil-next-line 5)))
-(set-in-all-evil-states-but-insert-and-visual "\M-k" '(lambda() (interactive) (evil-previous-line 5)))
+(set-in-all-evil-states-but-insert-and-visual "\M-j"
+'(lambda() (interactive) (evil-next-line 5)))
+(set-in-all-evil-states-but-insert-and-visual "\M-k"
+'(lambda() (interactive) (evil-previous-line 5)))
 (define-key evil-visual-state-map "\M-j" 'myevil-next-visual-line)
 (define-key evil-visual-state-map "\M-k" 'myevil-previous-visual-line)
 (set-in-all-evil-states-but-insert "\M-h" 'myevil-backward-char)
@@ -115,22 +124,33 @@
   )
 
 (evil-define-motion back-to-indentation-or-beginning ()
-  "If cursor is at indentation, move to 'bol', else, move to indentation as a side effect."
+  "If cursor is at indentation, move to 'bol', else, move to
+	indentation as a side effect."
   (interactive)
-  (if (= (point) (progn (back-to-indentation) (point)))
-	  (beginning-of-line)))
+  (if (= (point) (progn (back-to-indentation) (point))) (beginning-of-line)))
 
-;; SOME MOTION BINDINGS
+;; jump to beginning or end of line
 (define-key global-map (kbd "C-a") 'back-to-indentation-or-beginning)
 (set-in-all-evil-states-but-insert "0" 'back-to-indentation-or-beginning)
 (set-in-all-evil-states (kbd "C-e") 'end-of-line)
 
-;; JUMP WORDS IN CAMELCASE
+;; jump words in camelcase
 (load "~/.emacs.d/evil-little-word")
 
-;; BIND "h" and "l" to DIRED+ COMMANDS
+;; bind "h" and "l" to dired+ commands
 (eval-after-load 'dired
   '(evil-define-key 'normal dired-mode-map
 	 (kbd "h") 'diredp-up-directory-reuse-dir-buffer
 	 (kbd "l") 'diredp-find-file-reuse-dir-buffer)
   )
+
+;; make movement keys work like they should
+(define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+(define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+(define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+(define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+; make horizontal movement cross lines                                    
+(setq-default evil-cross-lines t)
+
+(provide 'init_evil)
+;;; init_evil.el ends here
