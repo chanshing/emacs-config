@@ -23,7 +23,8 @@
  '(font-lock-doc-face ((t (:inherit font-lock-string-face :slant italic))))
  '(font-lock-function-name-face ((t (:foreground "blue" :weight bold))))
  '(font-lock-keyword-face ((t (:foreground "magenta4" :weight bold))))
- '(font-lock-string-face ((t (:foreground "VioletRed4" :slant italic))))
+ '(font-lock-string-face ((t (:foreground "orange red"))))
+ '(font-lock-type-face ((t (:foreground "ForestGreen" :weight bold))))
  '(font-lock-variable-name-face ((t (:foreground "black")))))
 
 (custom-set-variables
