@@ -81,7 +81,6 @@
 ;; (setq line-move-visual t)
 
 (set-frame-font "Ubuntu Mono-12")  ;; set text font and size
-(print (font-family-list))
 
 ;; Fill Column Indicator (vertical line at 80)
 (add-hook 'emacs-lisp-mode-hook (lambda() (fci-mode t)))
