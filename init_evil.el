@@ -13,7 +13,7 @@
 (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
 
 (defun my-move-key (keymap-from keymap-to key)
-     "Moves key binding from one keymap to another, deleting from the old location. "
+     "Move key binding from one keymap to another, deleting from the old location."
      (define-key keymap-to key (lookup-key keymap-from key))
      (define-key keymap-from key nil))
 (my-move-key evil-motion-state-map evil-normal-state-map (kbd "RET"))
@@ -30,7 +30,7 @@
 
 ;;; M-s AS GENERAL PURPOSE ESCAPE KEY SEQUENCE.
 (defun my-esc (prompt)
-  "Functionality for escaping generally.  Includes exiting Evil insert state and C-g binding. "
+  "Functionality for escaping generally. Includes exiting Evil insert state and C-g binding."
   (cond
    ;; If we're in one of the Evil states that defines [escape] key, return [escape] so as
    ;; Key Lookup will use it.
@@ -43,9 +43,10 @@
 ;; works around the fact that evil uses read-event directly when in operator state, which
 ;; doesn't use the key-translation-map
 (define-key evil-operator-state-map (kbd "M-s") 'keyboard-quit)
+
 ;; not sure what behavior this changes, but might as well set it, seeing the elisp manual's
 ;; documentation of it.
-(set-quit-char (kbd "M-s"))
+;; (set-quit-char (kbd "M-s"))
 
 (setq evil-want-fine-undo t)
 
@@ -134,8 +135,8 @@
 (set-in-all-evil-states-but-insert "0" 'back-to-indentation-or-beginning)
 (set-in-all-evil-states (kbd "C-e") 'end-of-line)
 
-;; jump words in camelcase
-(load "~/.emacs.d/evil-little-word")
+;; ;; jump words in camelcase  DOESN'T WORK IN NEW EVIL
+;; (load "~/.emacs.d/evil-little-word")
 
 ;; bind "h" and "l" to dired+ commands
 (eval-after-load 'dired
