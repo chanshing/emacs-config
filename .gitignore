@@ -1,0 +1,13 @@
+.*
+*~
+session.*
+tramp
+ido.last
+autosaves
+backups
+smex-items
+projectile.cache
+projectile-bookmarks.eld
+
+# Except these files
+!.gitignore
